@@ -1,6 +1,6 @@
 import { io } from "socket.io-client";
 
-export const socket = io("http://localhost:5000", {
+export const socket = io("https://cms-backend-production.up.railway.app", {
   autoConnect: true
 });
 
@@ -9,5 +9,5 @@ socket.on("connect", () => {
 });
 
 socket.on("connect_error", (err) => {
-  console.error("❌ Socket connection error:", err.message);
+  console.error("Socket connection error:", err.message);
 });
