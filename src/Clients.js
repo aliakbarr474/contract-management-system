@@ -19,7 +19,7 @@ export default function Clients(){
         }
 
         try {
-            const response = await fetch('http://localhost:5000/clients/add', {
+            const response = await fetch('https://cms-backend-production.up.railway.app/clients/add', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({client,clientPhone})
@@ -41,7 +41,7 @@ export default function Clients(){
     useEffect (() => {
         const fetchClients = async () => {
             try {
-                const response = await fetch('http://localhost:5000/clients/show');
+                const response = await fetch('https://cms-backend-production.up.railway.app/clients/show');
                 if (!response.ok) {
                     console.log('Error retreiving clients');
                 }
@@ -56,7 +56,7 @@ export default function Clients(){
 
     const deleteClient = async (id) => {
         try {
-            const response = await fetch(`http://localhost:5000/clients/delete/${id}`, {
+            const response = await fetch(`https://cms-backend-production.up.railway.app/clients/delete/${id}`, {
                 method: 'DELETE'
             });
 

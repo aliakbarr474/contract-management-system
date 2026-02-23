@@ -54,10 +54,31 @@ export default function Vendors() {
         html2pdf().set(options).from(element).save();
     };
 
+    const printPDF = () => {
+        const element = contentRef.current;
+        const options = {
+            margin: 10,
+            filename: `${vendorName}_Ledger.pdf`,
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2 },
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        };
+
+        html2pdf()
+            .set(options)
+            .from(element)
+            .toPdf()
+            .get('pdf')
+            .then((pdf) => {
+                pdf.autoPrint();
+                window.open(pdf.output('bloburl'), '_blank');
+            });
+    };
+
     useEffect(() => {
         if (vendorId) {
             const fetchVendorLedger = async () => {
-                const response = await fetch(`http://localhost:5000/vendors/ledger/show/${vendorId}`);
+                const response = await fetch(`https://cms-backend-production.up.railway.app/vendors/ledger/show/${vendorId}`);
                 if (!response.ok) {
                     console.log('Error retrieving data');
                 }
@@ -84,7 +105,7 @@ export default function Vendors() {
         }
         
         try {
-            const response = await fetch('http://localhost:5000/vendors/add', {
+            const response = await fetch('https://cms-backend-production.up.railway.app/vendors/add', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ vendor, vendorPhone, openingBalance })
@@ -113,7 +134,7 @@ export default function Vendors() {
     useEffect(() => {
         const fetchVendors = async () => {
             try {
-                const response = await fetch('http://localhost:5000/vendors/show');
+                const response = await fetch('https://cms-backend-production.up.railway.app/vendors/show');
                 if (!response.ok) {
                     console.log('Error retrieving data');
                 }
@@ -146,7 +167,7 @@ export default function Vendors() {
         }
 
         try {
-            const response = await fetch('http://localhost:5000/expenses/add', {
+            const response = await fetch('https://cms-backend-production.up.railway.app/expenses/add', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -242,6 +263,11 @@ export default function Vendors() {
                             <div className="header-btns">
                                     <button className='header-add-btn' onClick={addPaymentClick}>
                                         Pay
+                                    </button>
+                                     <button onClick={printPDF} className="download-btn" style={{ marginRight: '10px' }}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#808183">
+                                            <path d="M640-640v-120H320v120h-80v-200h480v200h-80Zm-480 80h640-640Zm560 100q17 0 28.5-11.5T760-500q0-17-11.5-28.5T720-540q-17 0-28.5 11.5T680-500q0 17 11.5 28.5T720-460Zm-80 260v-160H320v160h320Zm80 80H240v-160H80v-240q0-33 23.5-56.5T160-600h640q33 0 56.5 23.5T880-520v240H720v160Zm80-240v-160q0-17-11.5-28.5T760-560H160q-17 0-28.5 11.5T120-520v160h120v-80h480v80h120Z" />
+                                        </svg>
                                     </button>
                                     <button onClick={downloadPDF} className="download-btn">
                                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#808183"><path d="M440-800v487L216-537l-56 57 320 320 320-320-56-57-224 224v-487h-80Z"/></svg>

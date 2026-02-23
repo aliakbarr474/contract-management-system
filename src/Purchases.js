@@ -46,7 +46,7 @@ export default function Purchases() {
         }
 
         try {
-            const response = await fetch('http://localhost:5000/vendors/add', {
+            const response = await fetch('https://cms-backend-production.up.railway.app/vendors/add', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ vendor, vendorPhone, openingBalance })
@@ -75,7 +75,7 @@ export default function Purchases() {
     useEffect(() => {
         const fetchVendors = async () => {
             try {
-                const response = await fetch('http://localhost:5000/vendors/show');
+                const response = await fetch('https://cms-backend-production.up.railway.app/vendors/show');
                 if (!response.ok) {
                     console.log('Error retrieving data');
                 }
@@ -100,7 +100,7 @@ export default function Purchases() {
 
     const invoiceStart = async (vendor) => {
         try {
-            const response = await fetch(`http://localhost:5000/invoice/start/${vendor}`, {
+            const response = await fetch(`https://cms-backend-production.up.railway.app/invoice/start/${vendor}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ invoiceNum })
@@ -127,7 +127,7 @@ export default function Purchases() {
         }
 
         try {
-            const response = await fetch('http://localhost:5000/products/add', {
+            const response = await fetch('https://cms-backend-production.up.railway.app/products/add', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ invoice_id, product, quantity, unit, rate, total })
@@ -162,7 +162,7 @@ export default function Purchases() {
         const fetchProducts = async () => {
             try {
                 const response = await fetch(
-                    `http://localhost:5000/products/show/${invoiceId.invoice_id}`
+                    `https://cms-backend-production.up.railway.app/products/show/${invoiceId.invoice_id}`
                 );
 
                 if (!response.ok) {
@@ -183,7 +183,7 @@ export default function Purchases() {
 
     const deleteProduct = async (id) => {
         try {
-            const response = await fetch(`http://localhost:5000/products/delete/${id}`, {
+            const response = await fetch(`https://cms-backend-production.up.railway.app/products/delete/${id}`, {
                 method: 'DELETE'
             });
 
@@ -205,7 +205,7 @@ export default function Purchases() {
         const fetchTotal = async () => {
             try {
                 const response = await fetch(
-                    `http://localhost:5000/purchase/total/${invoiceId.invoice_id}`
+                    `https://cms-backend-production.up.railway.app/purchase/total/${invoiceId.invoice_id}`
                 );
 
                 if (!response.ok) {
@@ -231,7 +231,7 @@ export default function Purchases() {
     const confirmPurchase = async () => {
         const vendorId = invoiceId.vendor_id;
         try {
-            const response = await fetch(`http://localhost:5000/purchase/advance/${invoiceId.invoice_id}`, {
+            const response = await fetch(`https://cms-backend-production.up.railway.app/purchase/advance/${invoiceId.invoice_id}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ advance, total, remainingAmt, vendorId })
@@ -250,7 +250,7 @@ export default function Purchases() {
     useEffect(() => {
         const fetchInvoices = async () => {
             try {
-                const response = await fetch('http://localhost:5000/invoices/show');
+                const response = await fetch('https://cms-backend-production.up.railway.app/invoices/show');
                 const result = await response.json();
                 setInvoiceData(result);
             } catch (error) {
@@ -277,7 +277,7 @@ export default function Purchases() {
     useEffect(() => {
         if (invoiceId) {
             const fetchInvoiceLedger = async () => {
-                const response = await fetch(`http://localhost:5000/invoices/ledger/show/${invoiceId}`);
+                const response = await fetch(`https://cms-backend-production.up.railway.app/invoices/ledger/show/${invoiceId}`);
                 if (!response.ok) {
                     console.log('Error retrieving data');
                 }

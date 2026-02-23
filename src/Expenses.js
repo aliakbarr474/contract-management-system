@@ -31,7 +31,7 @@ export default function Expenses() {
         }
 
         try {
-            const response = await fetch('http://localhost:5000/expenses/add', {
+            const response = await fetch('https://cms-backend-production.up.railway.app/expenses/add', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ type, amount, project, vendor, method })
@@ -65,7 +65,7 @@ export default function Expenses() {
     useEffect(() => {
         const fetchExpenses = async () => {
             try {
-                const response = await fetch('http://localhost:5000/expenses/show');
+                const response = await fetch('https://cms-backend-production.up.railway.app/expenses/show');
                 if (!response.ok) {
                     console.log('Error retrieving data');
                 }
@@ -82,7 +82,7 @@ export default function Expenses() {
 
     const deleteExpense = async (id) => {
         try {
-            const response = await fetch(`http://localhost:5000/expenses/delete/${id}`, {
+            const response = await fetch(`https://cms-backend-production.up.railway.app/expenses/delete/${id}`, {
                 method: 'DELETE'
             });
 
@@ -100,7 +100,7 @@ export default function Expenses() {
     useEffect(() => {
         const fetchVendors = async () => {
             try {
-                const response = await fetch('http://localhost:5000/vendors/show');
+                const response = await fetch('https://cms-backend-production.up.railway.app/vendors/show');
                 if (!response.ok) {
                     console.log('Error retrieving data');
                 }
@@ -126,7 +126,7 @@ export default function Expenses() {
     useEffect(() => {
         const fetchProjects = async () => {
             try {
-                const response = await fetch('http://localhost:5000/projects/show');
+                const response = await fetch('https://cms-backend-production.up.railway.app/projects/show');
                 if (!response.ok) {
                     console.log('Error retrieving data');
                 }

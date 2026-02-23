@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import Sidebar from "./Sidebar"
 import { useNavigate } from "react-router"
+import logo from './assets/logo.jpeg'
 
 export default function Dashboard() {
     const [totalPayable, setTotalPayable] = useState(0);
@@ -39,23 +40,23 @@ export default function Dashboard() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const payableRes = await fetch('http://localhost:5000/vendors/total-balance');
+                const payableRes = await fetch('https://cms-backend-production.up.railway.app/vendors/total-balance');
                 const payableData = await payableRes.json();
                 setTotalPayable(payableData.total_balance || 0);
 
-                const receiveRes = await fetch('http://localhost:5000/projects/total-receivable');
+                const receiveRes = await fetch('https://cms-backend-production.up.railway.app/projects/total-receivable');
                 const receiveData = await receiveRes.json();
                 setTotalReceivable(receiveData.total_receivable || 0);
 
-                const activeRes = await fetch('http://localhost:5000/projects/active-this-year');
+                const activeRes = await fetch('https://cms-backend-production.up.railway.app/projects/active-this-year');
                 const activeData = await activeRes.json();
                 setActiveProjects(activeData.project_count || 0);
 
-                const invoiceRes = await fetch('http://localhost:5000/dashboard/pending-invoices');
+                const invoiceRes = await fetch('https://cms-backend-production.up.railway.app/dashboard/pending-invoices');
                 const invoiceData = await invoiceRes.json();
                 setPendingInvoices(invoiceData);
 
-                const activityRes = await fetch('http://localhost:5000/dashboard/recent-activity');
+                const activityRes = await fetch('https://cms-backend-production.up.railway.app/dashboard/recent-activity');
                 const activityData = await activityRes.json();
                 setRecentActivity(activityData);
 
@@ -81,21 +82,7 @@ export default function Dashboard() {
                     <h1>Dashboard</h1>
 
                     <div className="side-heading" style={{ position: 'relative' }}>
-                        <p>Hi, {user}</p>
-
-                        <svg
-                            className="user-icon"
-                            onClick={togglePopup}
-                            xmlns="http://www.w3.org/2000/svg"
-                            height="30px"
-                            viewBox="0 -960 960 960"
-                            width="30px"
-                            fill="#808183"
-                            style={{ cursor: 'pointer' }}
-                        >
-                            <path d="M234-276q51-39 114-61.5T480-360q69 0 132 22.5T726-276q35-41 54.5-93T800-480q0-133-93.5-226.5T480-800q-133 0-226.5 93.5T160-480q0 59 19.5 111t54.5 93Zm146.5-204.5Q340-521 340-580t40.5-99.5Q421-720 480-720t99.5 40.5Q620-639 620-580t-40.5 99.5Q539-440 480-440t-99.5-40.5ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm100-95.5q47-15.5 86-44.5-39-29-86-44.5T480-280q-53 0-100 15.5T294-220q39 29 86 44.5T480-160q53 0 100-15.5ZM523-537q17-17 17-43t-17-43q-17-17-43-17t-43 17q-17 17-17 43t17 43q17 17 43 17t43-17Zm-43-43Zm0 360Z" />
-                        </svg>
-
+                        <img src={logo} onClick={togglePopup}></img>
                         {showLogout && (
                             <div className="logout-popup">
                                 <button onClick={handleLogout}>Logout</button>
