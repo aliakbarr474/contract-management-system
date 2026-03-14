@@ -19,7 +19,7 @@ export default function Clients(){
         }
 
         try {
-            const response = await fetch('https://cms-backend-production.up.railway.app/clients/add', {
+            const response = await fetch('/clients/add', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({client,clientPhone})
@@ -41,9 +41,10 @@ export default function Clients(){
     useEffect (() => {
         const fetchClients = async () => {
             try {
-                const response = await fetch('https://cms-backend-production.up.railway.app/clients/show');
+                const response = await fetch('/clients/show');
                 if (!response.ok) {
                     console.log('Error retreiving clients');
+                    return;
                 }
                 const result = await response.json();
                 setClientData(result);
@@ -56,7 +57,7 @@ export default function Clients(){
 
     const deleteClient = async (id) => {
         try {
-            const response = await fetch(`https://cms-backend-production.up.railway.app/clients/delete/${id}`, {
+            const response = await fetch(`/clients/delete/${id}`, {
                 method: 'DELETE'
             });
 

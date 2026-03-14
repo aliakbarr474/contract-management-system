@@ -76,7 +76,7 @@ export default function Projects() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('https://cms-backend-production.up.railway.app/clients/show');
+                const response = await fetch('/clients/show');
                 if (!response.ok) {
                     console.log('Error retrieving data');
                     return;
@@ -99,7 +99,7 @@ export default function Projects() {
         }
 
         try {
-            const response = await fetch('https://cms-backend-production.up.railway.app/projects/add', {
+            const response = await fetch('/projects/add', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ projectName, clientName, advance })
@@ -129,7 +129,7 @@ export default function Projects() {
     useEffect(() => {
         const fetchProjects = async () => {
             try {
-                const response = await fetch('https://cms-backend-production.up.railway.app/projects/show');
+                const response = await fetch('/projects/show');
                 if (!response.ok) {
                     console.log('Error retrieving data');
                 }
@@ -163,7 +163,7 @@ export default function Projects() {
         }
 
         try {
-            const response = await fetch('https://cms-backend-production.up.railway.app/expenses/add', {
+            const response = await fetch('/expenses/add', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -212,7 +212,7 @@ export default function Projects() {
             return;
         }
         try {
-            await fetch('https://cms-backend-production.up.railway.app/payments/add', {
+            await fetch('/payments/add', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ project, amount, method })
@@ -229,7 +229,7 @@ export default function Projects() {
     useEffect(() => {
         if (projectId) {
             const fetchProjectLedger = async () => {
-                const response = await fetch(`https://cms-backend-production.up.railway.app/project/ledger/show/${projectId}`)
+                const response = await fetch(`/project/ledger/show/${projectId}`)
                 if (!response.ok) {
                     console.log('Error retrieving data')
                 }

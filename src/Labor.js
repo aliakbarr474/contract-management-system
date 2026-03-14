@@ -43,7 +43,7 @@ export default function Labor() {
 
 
         try {
-            const response = await fetch('https://cms-backend-production.up.railway.app/labor/add', {
+            const response = await fetch('/labor/add', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ labor, salary })
@@ -65,7 +65,7 @@ export default function Labor() {
     useEffect(() => {
         const fetchLabor = async () => {
             try {
-                const response = await fetch('https://cms-backend-production.up.railway.app/labor/show');
+                const response = await fetch('/labor/show');
                 if (!response.ok) {
                     console.log('Error retreiving labor');
                 }
@@ -80,7 +80,7 @@ export default function Labor() {
 
     const deleteLabor = async (id) => {
         try {
-            const response = await fetch(`https://cms-backend-production.up.railway.app/labor/delete/${id}`, {
+            const response = await fetch(`/labor/delete/${id}`, {
                 method: 'DELETE'
             });
 
@@ -136,7 +136,7 @@ export default function Labor() {
         }
 
         try {
-            const response = await fetch('https://cms-backend-production.up.railway.app/labor/payments/add', {
+            const response = await fetch('/labor/payments/add', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ laborName, amount, method, description })
@@ -166,7 +166,7 @@ export default function Labor() {
     useEffect(() => {
         const fetchLaborPyments = async () => {
             try {
-                const response = await fetch('https://cms-backend-production.up.railway.app/labor/payments/show');
+                const response = await fetch('/labor/payments/show');
                 if (!response.ok) {
                     console.log('Error retreiving labor');
                 }

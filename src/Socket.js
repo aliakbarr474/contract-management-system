@@ -1,11 +1,11 @@
 import { io } from "socket.io-client";
 
-export const socket = io("https://cms-backend-production.up.railway.app", {
+export const socket = io({
   autoConnect: true
 });
 
 socket.on("connect", () => {
-  console.log("✅ Socket connected:", socket.id);
+  console.log("Socket connected:", socket.id);
 });
 
 socket.on("connect_error", (err) => {

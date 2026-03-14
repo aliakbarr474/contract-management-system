@@ -9,7 +9,7 @@ export default function Signup(){
 
     const signUp = async () => {
         try {
-            const response = await fetch('https://cms-backend-production.up.railway.app/signup', {
+            const response = await fetch('/signup', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({username,password})

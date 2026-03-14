@@ -23,7 +23,7 @@ export default function Payments() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('https://cms-backend-production.up.railway.app/projects/show');
+                const response = await fetch('/projects/show');
                 if (!response.ok) {
                     console.log('Error retrieving data');
                     return;
@@ -46,7 +46,7 @@ export default function Payments() {
         }
 
         try {
-            await fetch('https://cms-backend-production.up.railway.app/payments/add', {
+            await fetch('/payments/add', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ project, amount, method })
@@ -64,7 +64,7 @@ export default function Payments() {
     useEffect(() => {
         const fetchPayments = async () => {
             try {
-                const response = await fetch('https://cms-backend-production.up.railway.app/payments/show');
+                const response = await fetch('/payments/show');
                 if (!response.ok) {
                     console.log('Error retrieving data');
                 }
@@ -89,7 +89,7 @@ export default function Payments() {
 
     const deletePayment = async (id) => {
         try {
-            const response = await fetch(`https://cms-backend-production.up.railway.app/payments/delete/${id}`, {
+            const response = await fetch(`/payments/delete/${id}`, {
                 method: 'DELETE'
             });
 

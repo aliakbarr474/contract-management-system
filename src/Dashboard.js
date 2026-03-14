@@ -40,23 +40,23 @@ export default function Dashboard() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const payableRes = await fetch('https://cms-backend-production.up.railway.app/vendors/total-balance');
+                const payableRes = await fetch('/vendors/total-balance');
                 const payableData = await payableRes.json();
                 setTotalPayable(payableData.total_balance || 0);
 
-                const receiveRes = await fetch('https://cms-backend-production.up.railway.app/projects/total-receivable');
+                const receiveRes = await fetch('/projects/total-receivable');
                 const receiveData = await receiveRes.json();
                 setTotalReceivable(receiveData.total_receivable || 0);
 
-                const activeRes = await fetch('https://cms-backend-production.up.railway.app/projects/active-this-year');
+                const activeRes = await fetch('/projects/active-this-year');
                 const activeData = await activeRes.json();
                 setActiveProjects(activeData.project_count || 0);
 
-                const invoiceRes = await fetch('https://cms-backend-production.up.railway.app/dashboard/pending-invoices');
+                const invoiceRes = await fetch('/dashboard/pending-invoices');
                 const invoiceData = await invoiceRes.json();
                 setPendingInvoices(invoiceData);
 
-                const activityRes = await fetch('https://cms-backend-production.up.railway.app/dashboard/recent-activity');
+                const activityRes = await fetch('/dashboard/recent-activity');
                 const activityData = await activityRes.json();
                 setRecentActivity(activityData);
 

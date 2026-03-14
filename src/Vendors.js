@@ -78,7 +78,7 @@ export default function Vendors() {
     useEffect(() => {
         if (vendorId) {
             const fetchVendorLedger = async () => {
-                const response = await fetch(`https://cms-backend-production.up.railway.app/vendors/ledger/show/${vendorId}`);
+                const response = await fetch(`/vendors/ledger/show/${vendorId}`);
                 if (!response.ok) {
                     console.log('Error retrieving data');
                 }
@@ -105,7 +105,7 @@ export default function Vendors() {
         }
         
         try {
-            const response = await fetch('https://cms-backend-production.up.railway.app/vendors/add', {
+            const response = await fetch('/vendors/add', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ vendor, vendorPhone, openingBalance })
@@ -134,7 +134,7 @@ export default function Vendors() {
     useEffect(() => {
         const fetchVendors = async () => {
             try {
-                const response = await fetch('https://cms-backend-production.up.railway.app/vendors/show');
+                const response = await fetch('/vendors/show');
                 if (!response.ok) {
                     console.log('Error retrieving data');
                 }
@@ -167,7 +167,7 @@ export default function Vendors() {
         }
 
         try {
-            const response = await fetch('https://cms-backend-production.up.railway.app/expenses/add', {
+            const response = await fetch('/expenses/add', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
