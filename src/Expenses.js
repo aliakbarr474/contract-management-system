@@ -180,7 +180,7 @@ export default function Expenses() {
 
                 {showAdd && (
                     <div className='popup-overlay'>
-                        <div className='add-popup payment-popup'>
+                        <div className='add-popup'>
                             <div className='close-div'>
                                 <button onClick={() => toggleShowAdd(false)} className="close-btn">
                                     &times;
