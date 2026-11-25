@@ -1,70 +1,91 @@
-# Getting Started with Create React App
+# Contract Management System
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A web app that lets a construction contractor run their business in one place: clients, projects, vendors, purchases, labor, expenses and payments. Updates appear **in real time** for everyone using it, so the whole team always sees the same numbers.
 
-## Available Scripts
+Built as a freelance project for a construction contractor. This repository contains the **React frontend**.
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+- **Projects:** create projects with a client and an advance payment, and follow each project's running ledger. The ledger updates live as payments and costs come in. Ledgers and invoices can be exported as PDF.
+- **Clients:** add, view and remove clients.
+- **Vendors:** vendor list, a ledger for each vendor, and total outstanding balances.
+- **Purchases:** record purchases from vendors, including advance payments.
+- **Labor:** workers and their payments.
+- **Expenses:** record and remove expenses.
+- **Payments:** record client payments. New payments appear instantly for every user.
+- **Dashboard:** pending invoices, recent activity, active projects this year and total receivables.
+- **Accounts:** sign up, log in and protected routes.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Real-time updates
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+The app uses **Socket.IO**. When someone adds a payment, invoice, vendor or project change, the server broadcasts an event, and every open screen refreshes that data automatically, with no page reload.
 
-### `npm test`
+Each project ledger has its own room (`join-project-ledger`), so someone viewing a project only receives updates for that project.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+| Event | What it refreshes |
+|---|---|
+| `payment_added`, `paymentUpdated` | Payments |
+| `invoiceAdded` | Invoices |
+| `vendorAdded` | Vendors |
+| `projectUpdated` | Projects |
+| `project-ledger-updated` | The open project's ledger |
 
-### `npm run build`
+## Tech stack
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+| Area | Tools |
+|---|---|
+| UI | React 19, React Router 7 |
+| Real time | socket.io-client |
+| PDF export | html2pdf.js |
+| Backend (separate) | Node.js, Express, MySQL, Socket.IO |
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Pages
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+| Route | Page |
+|---|---|
+| `/` | Login |
+| `/signup` | Sign up |
+| `/dashboard` | Overview |
+| `/projects` | Projects and ledgers |
+| `/clients` | Clients |
+| `/vendors` | Vendors and ledgers |
+| `/purchases` | Purchases |
+| `/labor` | Labor and labor payments |
+| `/expenses` | Expenses |
+| `/payments` | Client payments |
 
-### `npm run eject`
+## Getting started
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Requirements: Node.js 18 or newer, and the backend API running.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+git clone https://github.com/aliakbarr474/contract-management-system.git
+cd contract-management-system
+npm install
+npm start
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+The app opens at `http://localhost:3000`. API requests use relative paths (for example `/projects/show`) and Socket.IO connects to the same origin, so the app expects to be served from the same host as the backend, or through a development proxy.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Project structure
 
-## Learn More
+```
+src/
+├── App.js            # routes
+├── Socket.js         # shared Socket.IO client
+├── ProtectedRoute.js
+├── Login.js / Signup.js
+├── Dashboard.js
+├── Projects.js       # projects, live ledgers, PDF export
+├── Clients.js
+├── Vendors.js
+├── Purchases.js
+├── Labor.js
+├── Expenses.js
+└── Payments.js
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Author
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+**Ali Akbar** — Full-stack developer
+[GitHub](https://github.com/aliakbarr474) · [LinkedIn](https://linkedin.com/in/ali-akbar-8592b1241) · aliakbarr474@gmail.com
